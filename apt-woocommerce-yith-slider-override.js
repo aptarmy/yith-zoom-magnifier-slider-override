@@ -12,4 +12,20 @@ yith_magnifier_options.sliderOptions.swipe = {
 }
 
 // Auto play carousel
-yith_magnifier_options.sliderOptions.auto = true;
+yith_magnifier_options.sliderOptions.auto = false;
+
+// Fix css heihgt error of the two element: '.caroufredsel_wrapper' and '.yith_magnifier_gallery'
+// when the slides are resized by Caroufredsel plugin
+(function(){
+	jQuery(document).ready(function(){
+		apt_yith_thumbnail_slider_height_reset();
+		jQuery(window).resize(function(){ apt_yith_thumbnail_slider_height_reset(); });
+	});
+	function apt_yith_thumbnail_slider_height_reset(){
+		setTimeout(function(){
+			var yith_magnifier_thumbnail_height = jQuery(".yith_magnifier_thumbnail").outerHeight();
+			console.log(yith_magnifier_thumbnail_height);
+			jQuery(".caroufredsel_wrapper, .yith_magnifier_gallery").css({"height": yith_magnifier_thumbnail_height + "px"});
+		}, 100);
+	}
+})();
